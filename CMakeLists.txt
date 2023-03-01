@@ -8,7 +8,7 @@ add_library(${PROJECT_NAME} STATIC "")
 
 # Setting warning level. WX and Werror means warnings are treated as errors.
 if(MSVC)
-target_compile_options(${PROJECT_NAME} PRIVATE -W4 )
+target_compile_options(${PROJECT_NAME} PRIVATE -W4 -WX)
 else()
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Werror)
 endif()
