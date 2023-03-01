@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 namespace corgi
 {
@@ -12,16 +13,6 @@ namespace string
  *        if n is greater than the size of the string, return an empty string
  */
 void chop(std::string& str, size_t n);
-
-/**
- * @brief   Removes a string that contains the n characters from the end of the given string 
- */
-[[nodiscard]] std::string chopped(const std::string& str, size_t n);
-
-/**
- * @brief   Removes a string that contains the n characters from the end of the given string 
- */
-[[nodiscard]] auto chopped_likely(const std::string& str, size_t n) -> std::string;
 
 /**
  * @brief   Returns true if the given str string ends with the given end string
@@ -87,26 +78,42 @@ void capitalize(std::string& str);
 /**
  * @brief left justifies the string parameter @p str
  */
-void ljust(std::string& str, size_t size, char c = ' ');
+void pad_right(std::string& str, size_t size, char c = ' ');
 
 /**
  * @brief right justifies the string parameter @p str
  */
-void rjust(std::string& str, size_t size, char c = ' ');
+void pad_left(std::string& str, size_t size, char c = ' ');
 
 /**
  * @brief   strips the left characters from the string
  * 
  *          mostly used without argument to remove the white spaces
 */
-void lstrip(std::string& str, const std::string& chars = " \t");
+void trim_start(std::string& str, const std::string& chars = " \t\n\f\r");
 
 /**
  * @brief   Strips the right characters from the string
  * 
  *          Mostly used without argument to remove white spaces from a string
  */
-void rstrip(std::string& str, const std::string& chars = " \t");
+void trim_end(std::string& str, const std::string& chars = " \t\n\f\r");
+
+/**
+ * @brief   Strips the left and right characters from the string 
+ */
+void trim(std::string& str, const std::string& chars = " \t\n\f\r");
+
+/**
+ * @brief   Splits the string parameter @p str using the given separator @p separator
+ */
+[[nodiscard]] std::vector<std::string> split(const std::string& str,
+                                             const std::string& separator);
+
+/**
+ * @brief Truncate the string 
+ */
+void truncate(std::string& str, size_t n);
 
 }    // namespace string
 }    // namespace corgi

@@ -23,22 +23,6 @@ int main()
                        assert_that(str, test::equals(std::string("")));
                    });
 
-    test::add_test("string", "chopped",
-                   []() -> void
-                   {
-                       std::string str    = "Hello there";
-                       auto        result = corgi::string::chopped(str, 6);
-
-                       assert_that(result, test::equals(std::string("Hello")));
-
-                       result = corgi::string::chopped(result, 10);
-                       assert_that(result, test::equals(std::string("")));
-
-                       str    = "Hello there";
-                       result = corgi::string::chopped(str, str.size());
-                       assert_that(result, test::equals(std::string("")));
-                   });
-
     test::add_test(
         "string", "ends_with",
         []() -> void
@@ -155,44 +139,85 @@ int main()
                        assert_that(corgi::string::is_number(str), equals(true));
                    });
 
-    test::add_test("string", "ljust",
+    test::add_test("string", "pad_right",
                    []() -> void
                    {
                        std::string str = "cat";
-                       corgi::string::ljust(str, 10);
+                       corgi::string::pad_right(str, 10);
                        assert_that(str, equals(std::string("cat       ")));
                    });
 
-    test::add_test("string", "rjust",
+    test::add_test("string", "pad_left",
                    []() -> void
                    {
                        std::string str = "cat";
-                       corgi::string::rjust(str, 10);
+                       corgi::string::pad_left(str, 10);
                        assert_that(str, equals(std::string("       cat")));
+
+                       str = "cat";
+                       corgi::string::pad_left(str, 2);
+                       assert_that(str, equals(std::string("cat")));
                    });
 
-    test::add_test("string", "lstrip",
+    test::add_test("string", "trim_start",
                    []() -> void
                    {
                        std::string str = "     Hello there";
-                       corgi::string::lstrip(str);
+                       corgi::string::trim_start(str);
                        assert_that(str, equals(std::string("Hello there")));
 
                        str = "     Hello there";
-                       corgi::string::lstrip(str, " H");
+                       corgi::string::trim_start(str, " H");
                        assert_that(str, equals(std::string("ello there")));
                    });
 
-    test::add_test("string", "rstrip",
+    test::add_test("string", "trim_end",
                    []() -> void
                    {
                        std::string str = "Hello there     ";
-                       corgi::string::rstrip(str);
+                       corgi::string::trim_end(str);
                        assert_that(str, equals(std::string("Hello there")));
 
                        str = "Hello there      ";
-                       corgi::string::rstrip(str, " e");
+                       corgi::string::trim_end(str, " e");
                        assert_that(str, equals(std::string("Hello ther")));
+                   });
+
+    test::add_test("string", "trim",
+                   []() -> void
+                   {
+                       std::string str = "        Hello there     ";
+                       corgi::string::trim(str);
+                       assert_that(str, equals(std::string("Hello there")));
+
+                       str = "       Hello there      ";
+                       corgi::string::trim(str, " eH");
+                       assert_that(str, equals(std::string("llo ther")));
+                   });
+
+    test::add_test("string", "split",
+                   []() -> void
+                   {
+                       std::string str    = "Hello there";
+                       auto        result = corgi::string::split(str, " ");
+
+                       assert_that(result[0], equals(std::string("Hello")));
+                       assert_that(result[1], equals(std::string("there")));
+
+                       str    = "Hello, there Obi-Wan-Kenobi";
+                       result = corgi::string::split(str, ", ");
+
+                       assert_that(result[0], equals(std::string("Hello")));
+                       assert_that(result[1],
+                                   equals(std::string("there Obi-Wan-Kenobi")));
+                   });
+
+    test::add_test("string", "split",
+                   []() -> void
+                   {
+                       std::string str = "Hello there";
+                       corgi::string::truncate(str, 5);
+                       assert_that(str, equals(std::string("Hello")));
                    });
 
     corgi::test::run_all();

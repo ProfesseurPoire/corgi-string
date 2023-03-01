@@ -17,14 +17,6 @@ void chop(std::string& str, size_t n)
     str.resize(str.size() - n);
 }
 
-std::string chopped(const std::string& str, size_t n)
-{
-    if(n >= str.size())
-        return "";
-
-    return str.substr(0, str.size() - n);
-}
-
 bool ends_with(const std::string& str, const std::string& end)
 {
     auto result = str.rfind(end);
@@ -140,7 +132,7 @@ bool is_number(const std::string& str)
     return true;
 }
 
-void ljust(std::string& str, size_t size, char c)
+void pad_right(std::string& str, size_t size, char c)
 {
     auto previous_size = str.size();
     str.resize(size);
@@ -152,14 +144,17 @@ void ljust(std::string& str, size_t size, char c)
     }
 }
 
-void rjust(std::string& str, size_t size, char c)
+void pad_left(std::string& str, size_t size, char c)
 {
+    if(size < str.size())
+        return;
+
     auto previous_size = str.size();
     str.reserve(size);
     str.insert(str.begin(), size - previous_size, c);
 }
 
-void lstrip(std::string& str, const std::string& chars)
+void trim_start(std::string& str, const std::string& chars)
 {
     size_t i = 0;
 
@@ -177,7 +172,7 @@ void lstrip(std::string& str, const std::string& chars)
     }
 }
 
-void rstrip(std::string& str, const std::string& chars)
+void trim_end(std::string& str, const std::string& chars)
 {
     int i = static_cast<int>(str.size() - 1);
 
@@ -193,6 +188,36 @@ void rstrip(std::string& str, const std::string& chars)
             return;
         i--;
     }
+}
+
+void trim(std::string& str, const std::string& chars)
+{
+    trim_start(str, chars);
+    trim_end(str, chars);
+}
+
+std::vector<std::string> split(const std::string& str, const std::string& separator)
+{
+    std::vector<std::string> sub_strings;
+    size_t                   start = 0;
+
+    auto result = str.find(separator, start);
+
+    while(result != std::string::npos)
+    {
+        sub_strings.push_back(str.substr(start, result));
+        start  = result + separator.size();
+        result = str.find(separator, start);
+    }
+
+    sub_strings.push_back(str.substr(start, result));
+
+    return sub_strings;
+}
+
+void truncate(std::string& str, size_t n)
+{
+    str.erase(n, std::string::npos);
 }
 
 }    // namespace corgi::string
