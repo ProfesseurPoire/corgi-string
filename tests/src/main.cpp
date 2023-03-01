@@ -46,6 +46,18 @@ int main()
             assert_that(corgi::string::ends_with(str, "coin"), test::equals(false));
         });
 
+    test::add_test(
+        "string", "starts_with",
+        []() -> void
+        {
+            std::string str = "Hello there";
+            assert_that(corgi::string::starts_with(str, "Hello"), test::equals(true));
+            assert_that(corgi::string::starts_with(str, "coin"), test::equals(false));
+
+            str = "";
+            assert_that(corgi::string::starts_with(str, "hoi"), test::equals(false));
+        });
+
     corgi::test::run_all();
     return 0;
 }

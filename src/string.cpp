@@ -31,4 +31,14 @@ bool ends_with(const std::string& str, const std::string& end)
     return (result == str.size() - end.size());
 }
 
+bool starts_with(const std::string& str, const std::string& start)
+{
+    auto result = str.find(start);
+
+    if(result == std::string::npos)
+        return false;
+
+    return result == 0;
+}
+
 }    // namespace corgi::string

@@ -28,5 +28,10 @@ void chop(std::string& str, size_t n);
 */
 [[nodiscard]] bool ends_with(const std::string& str, const std::string& end);
 
+/**
+ * @brief   Returns true if the string parameter @p str starts with string parameter @p start 
+*/
+[[nodiscard]] bool starts_with(const std::string& str, const std::string& start);
+
 }    // namespace string
 }    // namespace corgi
