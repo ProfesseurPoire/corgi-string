@@ -4,7 +4,7 @@ project(test-string)
 
 add_executable(${PROJECT_NAME} "") 
 
-target_sources(${PROJECT_NAME} PRIVATE src/main.cpp)
+target_sources(${PROJECT_NAME} PRIVATE src/main_tests.cpp)
 
 find_package(corgi-test CONFIG)
 

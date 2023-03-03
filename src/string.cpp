@@ -122,8 +122,9 @@ bool is_number(const std::string& str)
 {
     try
     {
-        std::stoi(str);
-        std::stof(str);
+        auto a = std::stoi(str);
+        auto b = std::stof(str);
+        a      = a + static_cast<int>(b);
     }
     catch(const std::exception&)
     {
