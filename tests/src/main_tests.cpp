@@ -101,6 +101,11 @@ int main()
 
                        str = "Hello15";
                        assert_that(corgi::string::is_alpha_num(str), equals(true));
+
+                       std::string r;
+                       r.push_back(-32);
+
+                       assert_that(corgi::string::is_alpha_num(r), equals(false));
                    });
 
     test::add_test("string", "is_alpha",

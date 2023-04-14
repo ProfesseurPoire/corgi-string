@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cctype>
+#include <iostream>
 #include <string>
 
 namespace corgi::string
@@ -86,7 +87,7 @@ bool is_alpha_num(const std::string& str)
 
     for(const auto& c : str)
     {
-        if(!std::isalnum(static_cast<int>(c)))
+        if(!std::isalnum(static_cast<unsigned char>(c)))
             return false;
     }
     return true;

@@ -1,5 +1,5 @@
 @PACKAGE_INIT@
 
-include("${CMAKE_CURRENT_LIST_DIR}/project_nameTargets.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/corgi-stringTargets.cmake")
 
-check_required_components(project_name)
+check_required_components(corgi-string)
